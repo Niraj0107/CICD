@@ -1,7 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.firebase.appdistribution'
+    id 'com.google.gms.google-services'
+    id 'io.gitlab.arturbosch.detekt'
 }
+
+
 
 android {
     namespace 'com.example.testcicd'
@@ -18,6 +23,12 @@ android {
     }
 
     buildTypes {
+        debug{
+            firebaseAppDistribution {
+                groups="QA"
+                serviceCredentialsFile = file("$rootDir/app/serviceAccountKey.json")
+            }
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -41,4 +52,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+detekt {
+    version = "1.20.0" // Set the version of Detekt (optional but recommended).
+   // config = files("$rootDir/config/detekt-config.yml") // Optional: Provide a custom Detekt config file.
+    // You can add more Detekt configuration options as needed.
 }
