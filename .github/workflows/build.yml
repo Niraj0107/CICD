@@ -39,7 +39,7 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
 
       - name: Upload APK
         id: upload_apk
@@ -50,7 +50,7 @@ jobs:
           asset_name: app-debug.apk
           asset_content_type: application/vnd.android.package-archive
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
 
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
