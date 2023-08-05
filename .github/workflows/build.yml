@@ -2,7 +2,8 @@ name: Build and Deploy APK
 
 on:
   push:
-    branches: ["master"]
+    branches:
+      - master
 
 jobs:
   build:
@@ -15,8 +16,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11  # Replace with the desired Java version, e.g., 8
-          distribution: 'adopt'  # Specify the distribution, e.g., adopt, openj9, temurin
+          java-version: 11
+          distribution: 'adopt'
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
@@ -30,3 +31,15 @@ jobs:
           name: test_app
           path: app/build/outputs/apk/debug/app-debug.apk
 
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: niraj07.k@gmail.com
+          password: ${{ secrets.GMAIL_TOKEN }}
+          subject: APK Build Notification
+          body: |
+            Here is the link to download the APK:
+            ${{ steps.upload.outputs.artifact_url }}
+          to: niraj.kumar@tissatech.com
