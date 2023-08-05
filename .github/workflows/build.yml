@@ -25,11 +25,23 @@ jobs:
       - name: Build APK
         run: .\gradlew assembleDebug
 
-      - name: Upload Bundle
-        uses: actions/upload-artifact@v3
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         with:
-          name: test_app
-          path: app/build/outputs/apk/debug/app-debug.apk
+          tag_name: v1.0.0  # Replace with your desired tag name
+          release_name: Release v1.0.0  # Replace with your desired release name
+          draft: false
+          prerelease: false
+
+      - name: Upload APK
+        id: upload_apk
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/debug/app-debug.apk
+          asset_name: app-debug.apk
+          asset_content_type: application/vnd.android.package-archive
 
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
@@ -42,5 +54,5 @@ jobs:
           subject: APK Build Notification
           body: |
             Here is the link to download the APK:
-            ${{ steps.upload.outputs.artifact_url }}
+            ${{ steps.upload_apk.outputs.browser_download_url }}
           to: niraj.kumar@tissatech.com
