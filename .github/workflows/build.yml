@@ -36,9 +36,9 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: aadesh
+          username: Niraj
           password: ${{ secrets.GMAIL_PASSWORD }}
-          from: aadesh.tripathi011@gmail.com
+          from: niraj07.k@gmail.com
           subject: APK Build Notification
           body: |
             Here is the link to download the APK:
