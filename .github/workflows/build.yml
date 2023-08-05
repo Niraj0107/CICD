@@ -15,25 +15,15 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11
-          distribution: 'adopt'
+          java-version: 11  # Replace with the desired Java version, e.g., 8
+          distribution: 'adopt'  # Specify the distribution, e.g., adopt, openj9, temurin
 
       - name: Build APK
         run: .\gradlew assembleDebug
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+      - name: Upload Bundle
+        uses: actions/upload-artifact@v2
         with:
-          files: app/build/outputs/apk/debug/app-debug.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # This is the GitHub token provided by GitHub Actions
+          name: signed_app_bundle
+          path: app/build/outputs/bundle/release/app-debug.apk
 
-      - name: Set up Git
-        run: |
-          git config user.name "Your Name"
-          git config user.email "your.email@example.com"
-          git tag v1.0.0  # Replace v1.0.0 with the desired tag name
-          git push origin v1.0.0  # Push the tag to your remote repository
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
