@@ -2,8 +2,7 @@ name: Build and Deploy APK
 
 on:
   push:
-    branches:
-      - [ "master" ]  # Replace with your main branch name, e.g., master
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -16,7 +15,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 11  # Replace with the desired Java version, e.g., 8
+          java-version: 11
 
       - name: Build APK
         run: ./gradlew assembleDebug
