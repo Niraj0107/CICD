@@ -19,7 +19,7 @@ jobs:
           distribution: 'adopt'  # Specify the distribution, e.g., adopt, openj9, temurin
 
       - name: Build APK
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug appDistributionUploadDebug
 
       - name: Move APK to Desired Location
         run: mv app/build/outputs/apk/debug/app-debug.apk
