@@ -25,3 +25,8 @@ jobs:
         run: ./gradlew assembleDebug appDistributionUploadDebug
         env:
           FIREBASE_TOKEN: ${{ secrets.CICD_FIREBASE_TOKEN }}
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: app/build/outputs/apk/debug/app-debug.apk
