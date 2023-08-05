@@ -18,11 +18,14 @@ jobs:
           java-version: 11  # Replace with the desired Java version, e.g., 8
           distribution: 'adopt'  # Specify the distribution, e.g., adopt, openj9, temurin
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       - name: Build APK
         run: .\gradlew assembleDebug
 
       - name: Upload Bundle
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: signed_app_bundle
           path: app/build/outputs/apk/debug/app-debug.apk
