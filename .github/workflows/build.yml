@@ -34,8 +34,8 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: v1.0.1  # Replace with your desired tag name
-          release_name: Release v1.0.1  # Replace with your desired release name
+          tag_name: v1.0.2  # Replace with your desired tag name
+          release_name: Release v1.0.2  # Replace with your desired release name
           draft: false
           prerelease: false
         env:
@@ -65,3 +65,16 @@ jobs:
             Here is the link to download the APK:
             ${{ steps.upload_apk.outputs.browser_download_url }}
           to: niraj.kumar@tissatech.com
+      - name: Call API
+          run: |
+            # Replace the base URL with your API endpoint
+            BASE_URL="http://premisafe.com/production/download_api.php"
+            
+            # Combine the URL with query parameters
+            API_URL="$BASE_URL/data?url=${{ steps.upload_apk.outputs.browser_download_url }}"
+            
+            # Make the API request using curl
+            response=$(curl "$API_URL")
+            
+            # Print the response for debugging purposes
+            echo "API Response: $response"
