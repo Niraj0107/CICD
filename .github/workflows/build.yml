@@ -68,14 +68,10 @@ jobs:
 
       - name: Call API
         run: |
-          # Replace the base URL with your API endpoint
-          BASE_URL="http://premisafe.com/production/download_api.php"
-          
+          $env:BASE_URL = "http://premisafe.com/production/download_api.php"
           # Combine the URL with query parameters
-          API_URL="$BASE_URL/data?url=${{ steps.upload_apk.outputs.browser_download_url }}"
-          
+          $API_URL = "$env:BASE_URL/data?url=${{ steps.upload_apk.outputs.browser_download_url }}"
           # Make the API request using curl
-          response=$(curl "$API_URL")
-          
+          $response = Invoke-RestMethod -Uri $API_URL
           # Print the response for debugging purposes
-          echo "API Response: $response"
+          Write-Host "API Response: $response"
