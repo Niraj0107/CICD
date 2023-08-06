@@ -65,6 +65,7 @@ jobs:
             Here is the link to download the APK:
             ${{ steps.upload_apk.outputs.browser_download_url }}
           to: niraj.kumar@tissatech.com
+
       - name: Call API
           run: |
             # Replace the base URL with your API endpoint
