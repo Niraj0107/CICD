@@ -33,8 +33,7 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        with:tag_name:v1.0.0
-        release_name: Release v1.0.0# Replace with your desired release name
+        with:tag_name: v1.0.1# Replace with your desired release name
           draft: false
           prerelease: false
         env:
