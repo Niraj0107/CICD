@@ -35,7 +35,7 @@ jobs:
         uses: actions/create-release@v1
         with:
           tag_name: v1.0.5 # Replace with your desired tag name 
-					release_name: Release v1.0.5 # Replace with your desired release name # Replace with your desired release name
+	  release_name: Release v1.0.5 # Replace with your desired release name
           draft: false
           prerelease: false
         env:
