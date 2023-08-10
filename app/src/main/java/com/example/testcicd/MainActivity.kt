@@ -6,8 +6,8 @@ import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
-    private var companyId: Int = 221
- 	override fun onCreate(savedInstanceState: Bundle?) {
+    private var companyId: Int = 220
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
