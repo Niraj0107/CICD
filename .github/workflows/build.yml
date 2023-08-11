@@ -62,8 +62,8 @@ jobs:
 
         with:
 
-          tag_name: v1.1.6  # Replace with your desired tag name
-          release_name: Release v1.1.6  # Replace with your desired release name
+          tag_name: v1.2.6  # Replace with your desired tag name
+          release_name: Release v1.2.6  # Replace with your desired release name
           draft: false
 
           prerelease: false
