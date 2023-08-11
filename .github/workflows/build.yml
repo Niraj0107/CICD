@@ -1,17 +1,25 @@
 name: Build and Deploy APK
 
+ 
+
 on:
   push:
     paths:
       - .github/workflows/build.yml
 
+ 
+
 jobs:
   build:
     runs-on: windows-latest
 
+ 
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+ 
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -19,27 +27,37 @@ jobs:
           java-version: 11
           distribution: 'adopt'
 
+ 
+
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+ 
+
       - name: Build APK
         run: .\gradlew assembleDebug
+
+ 
 
       - name: Set up Git
         run: |
           git config --global user.name "Niraj0107"
           git config --global user.email "niraj.kumar@tissatech.com"
 
+ 
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: v1.1.6 # Replace with your desired tag name 
-	  release_name: Release v1.1.6 # Replace with your desired release name
+          tag_name: v1.0.5  # Replace with your desired tag name
+          release_name: Release v1.0.5  # Replace with your desired release name
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+
+ 
 
       - name: Upload APK
         id: upload_apk
@@ -51,6 +69,8 @@ jobs:
           asset_content_type: application/vnd.android.package-archive
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
+
+ 
 
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
@@ -65,6 +85,8 @@ jobs:
             Here is the link to download the APK:
             ${{ steps.upload_apk.outputs.browser_download_url }}
           to: niraj.kumar@tissatech.com
+
+ 
 
       - name: Call API
         run: |
