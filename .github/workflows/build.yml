@@ -2,8 +2,8 @@ name: Build and Deploy APK
 
 on:
   push:
-    branches:
-      - '.github/workflows/build.yml'
+    paths:
+      - .github/workflows/build.yml
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Set up JDK
         uses: actions/setup-java@v2
